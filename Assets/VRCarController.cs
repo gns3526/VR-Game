@@ -1,6 +1,7 @@
 using Unity.VRTemplate;
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
+using TMPro; // ★ TextMeshPro 사용을 위해 필수
 
 public class VRCarController : MonoBehaviour
 {
@@ -16,12 +17,12 @@ public class VRCarController : MonoBehaviour
     public Transform rearLeftWheelTransform;
     public Transform rearRightWheelTransform;
 
-    [Header("Inputs (키보드/VR컨트롤러)")]
-    public InputActionProperty accelerateInput; // W 키
-    public InputActionProperty reverseInput;    // S 키
+    [Header("Inputs")]
+    public InputActionProperty throttleInput; // 액셀 페달 (W키)
     
-    [Header("Steering Input")]
+    [Header("Steering & Gear UI")]
     public XRKnob steeringKnob;
+    public TextMeshPro gearText; // ★ UI가 아닌 3D Object의 TextMeshPro 컴포넌트
 
     [Header("Driving Settings")]
     public float motorForce = 2000f;
@@ -29,57 +30,44 @@ public class VRCarController : MonoBehaviour
     public float brakeForce = 5000f;
     public float accelerationRate = 2.0f;
 
-    // === 내부 변수 ===
+    // === 상태 변수 ===
     private float currentMotorTorque = 0f;
     private Rigidbody rb;
     private bool isTilted = false;
 
-    // ★ 이벤트 제어용 상태 변수 (스위치)
-    private bool isEventAccelerating = false; // 외부에서 가속 요청이 있는가?
-    private bool isEventReversing = false;    // 외부에서 후진 요청이 있는가?
+    // 기어 상태 (False: 전진 D / True: 후진 R)
+    private bool isReverseGear = false; 
+
+    // 액셀 페달 상태
+    private bool isThrottlePressed = false; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -0.5f, 0);
+
+        // 시작할 때 기어 표시 초기화 (D)
+        UpdateGearDisplay();
     }
 
-    void OnEnable()
-    {
-        if (accelerateInput.action != null) accelerateInput.action.Enable();
-        if (reverseInput.action != null) reverseInput.action.Enable();
-    }
-    
-    void OnDisable()
-    {
-        if (accelerateInput.action != null) accelerateInput.action.Disable();
-        if (reverseInput.action != null) reverseInput.action.Disable();
-    }
+    void OnEnable() { throttleInput.action?.Enable(); }
+    void OnDisable() { throttleInput.action?.Disable(); }
 
     void FixedUpdate()
     {
-        // 1. 키보드/VR컨트롤러 입력값 읽기 (0.0 ~ 1.0)
-        float fwdRaw = accelerateInput.action.ReadValue<float>();
-        float bwdRaw = reverseInput.action.ReadValue<float>();
+        float inputVal = throttleInput.action.ReadValue<float>();
+        
+        // 외부 이벤트(isThrottlePressed) 또는 키보드 입력 체크
+        float finalThrottle = (isThrottlePressed || inputVal > 0.1f) ? 1.0f : 0f;
 
-        // 2. 이벤트 입력과 합치기 (키보드나 이벤트 둘 중 하나만 들어와도 작동)
-        // 키보드를 안 눌러도 isEventAccelerating이 true면 1.0f가 됨
-        float finalFwd = (isEventAccelerating || fwdRaw > 0.1f) ? 1.0f : 0f;
-        float finalBwd = (isEventReversing || bwdRaw > 0.1f) ? 1.0f : 0f;
-
-        // 아날로그 트리거(살살 누르기)를 지원하려면 아래처럼 Max값 사용
-        if (fwdRaw > 0) finalFwd = Mathf.Max(fwdRaw, isEventAccelerating ? 1f : 0f);
-        if (bwdRaw > 0) finalBwd = Mathf.Max(bwdRaw, isEventReversing ? 1f : 0f);
-
-        // 디버깅: 입력 합산 결과 확인
-        if (finalFwd > 0 || finalBwd > 0) 
-            Debug.Log($"Driving.. Fwd: {finalFwd}, Bwd: {finalBwd}");
+        // 아날로그 입력 대응
+        if (inputVal > 0) finalThrottle = Mathf.Max(inputVal, isThrottlePressed ? 1f : 0f);
 
         CheckForFlipAndStop();
 
         if (!isTilted)
         {
-            HandleMotor(finalFwd, finalBwd);
+            HandleMotor(finalThrottle);
             HandleSteering(); 
         }
         else
@@ -91,51 +79,71 @@ public class VRCarController : MonoBehaviour
     }
 
     // =========================================================
-    // ★★★ 외부 이벤트 연결용 함수들 (Inspector에서 연결) ★★★
+    // ★★★ 액셀 페달 이벤트 (누르면 가속, 떼면 멈춤) ★★★
     // =========================================================
-    
-    // 버튼을 누를 때 호출 (Pointer Down)
     public void StartAccelerate() 
     { 
-        isEventAccelerating = true; 
-        Debug.Log("Event: Start Accel");
+        isThrottlePressed = true; 
     }
 
-    // 버튼을 뗄 때 호출 (Pointer Up)
     public void StopAccelerate() 
     { 
-        isEventAccelerating = false; 
-        Debug.Log("Event: Stop Accel");
+        isThrottlePressed = false; 
     }
 
-    // 후진 버튼 누를 때
-    public void StartReverse() 
-    { 
-        isEventReversing = true; 
+    // =========================================================
+    // ★★★ 기어 변속 (이벤트 연결용) ★★★
+    // =========================================================
+    
+    // ★ 이 함수를 기어 버튼(Button/Lever)의 이벤트에 연결하세요.
+    // 누를 때마다 D -> R -> D -> R 순서로 바뀝니다.
+    public void ToggleGear()
+    {
+        isReverseGear = !isReverseGear; // 상태 반전 (True <-> False)
+        UpdateGearDisplay();            // 텍스트 변경
+        
+        Debug.Log($"Gear Changed: {(isReverseGear ? "R (Reverse)" : "D (Drive)")}");
     }
 
-    // 후진 버튼 뗄 때
-    public void StopReverse() 
-    { 
-        isEventReversing = false; 
+    // 내부적으로 텍스트를 업데이트하는 함수
+    public void UpdateGearDisplay()
+    {
+        if (gearText != null)
+        {
+            if (isReverseGear)
+            {
+                gearText.text = "R";
+                gearText.color = Color.red; // 후진은 빨간색 (원하면 변경 가능)
+            }
+            else
+            {
+                gearText.text = "D";
+                gearText.color = Color.green; // 전진은 초록색
+            }
+        }
     }
+
     // =========================================================
 
-    void HandleMotor(float forwardInput, float backwardInput)
+    void HandleMotor(float throttleInput)
     {
         float targetTorque = 0f;
         
-        if (forwardInput > 0.1f) // 전진
+        if (throttleInput > 0.1f) // 액셀 밟음
         {
-            targetTorque = forwardInput * motorForce;
+            if (isReverseGear)
+            {
+                // 후진 기어 상태면 뒤로 힘을 줌
+                targetTorque = -throttleInput * motorForce;
+            }
+            else
+            {
+                // 전진 기어 상태면 앞으로 힘을 줌
+                targetTorque = throttleInput * motorForce;
+            }
             ApplyBrakeForce(0f);
         }
-        else if (backwardInput > 0.1f) // 후진
-        {
-            targetTorque = -backwardInput * motorForce;
-            ApplyBrakeForce(0f);
-        }
-        else // 정지
+        else // 액셀 뗌
         {
             targetTorque = 0f;
             ApplyBrakeForce(brakeForce * 0.5f);

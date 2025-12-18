@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{81965045-1859-EA83-B65F-3B4CB529F6E9}</ProjectGuid>
+    <ProjectGuid>{392990CD-C5BF-F4A5-3BAA-F64C9D5E2739}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Meta.Voice.Samples.TTSVoices</AssemblyName>
@@ -959,11 +959,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Meta.WitAi.TTS.csproj">
-      <Project>{EF5389A4-690A-78B6-412E-3EC48B5B0939}</Project>
+      <Project>{09F6CB4B-9A3E-26CF-47F5-6F12FAC2B97B}</Project>
       <Name>Meta.WitAi.TTS</Name>
     </ProjectReference>
     <ProjectReference Include="Meta.WitAi.Lib.csproj">
-      <Project>{7E45A7A4-CDBF-1003-C8C9-9FE5C49F4083}</Project>
+      <Project>{B56CE44D-942E-66FC-23DD-6FD0589342BA}</Project>
       <Name>Meta.WitAi.Lib</Name>
     </ProjectReference>
   </ItemGroup>

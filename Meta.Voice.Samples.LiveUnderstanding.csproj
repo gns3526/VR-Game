@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{67737D00-85D7-53CD-F87D-F0FE6EFF0906}</ProjectGuid>
+    <ProjectGuid>{27F44A9C-517B-23E3-667B-06C03C992B4C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Meta.Voice.Samples.LiveUnderstanding</AssemblyName>
@@ -949,11 +949,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Meta.WitAi.csproj">
-      <Project>{320F478A-943A-700C-D16B-1175921DD5D5}</Project>
+      <Project>{C15B8984-3970-0276-7BF5-8367C9F8316E}</Project>
       <Name>Meta.WitAi</Name>
     </ProjectReference>
     <ProjectReference Include="Meta.WitAi.Lib.csproj">
-      <Project>{7E45A7A4-CDBF-1003-C8C9-9FE5C49F4083}</Project>
+      <Project>{B56CE44D-942E-66FC-23DD-6FD0589342BA}</Project>
       <Name>Meta.WitAi.Lib</Name>
     </ProjectReference>
   </ItemGroup>

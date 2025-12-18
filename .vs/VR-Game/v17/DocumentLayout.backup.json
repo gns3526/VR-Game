@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\admin\\VR-Game\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|c:\\users\\admin\\vr-game\\assets\\autocentersteering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|solutionrelative:assets\\autocentersteering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|c:\\users\\admin\\vr-game\\assets\\gearstickancor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|solutionrelative:assets\\gearstickancor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|C:\\Users\\admin\\VR-Game\\assets\\vrcarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|solutionrelative:assets\\vrcarcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AutoCenterSteering.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\VR-Game\\Assets\\AutoCenterSteering.cs",
+              "RelativeDocumentMoniker": "Assets\\AutoCenterSteering.cs",
+              "ToolTip": "C:\\Users\\admin\\VR-Game\\Assets\\AutoCenterSteering.cs",
+              "RelativeToolTip": "Assets\\AutoCenterSteering.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwB8AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T07:44:03.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GearStickAncor.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\VR-Game\\Assets\\GearStickAncor.cs",
+              "RelativeDocumentMoniker": "Assets\\GearStickAncor.cs",
+              "ToolTip": "C:\\Users\\admin\\VR-Game\\Assets\\GearStickAncor.cs",
+              "RelativeToolTip": "Assets\\GearStickAncor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T07:29:31.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VRCarController.cs",
+              "DocumentMoniker": "C:\\Users\\admin\\VR-Game\\Assets\\VRCarController.cs",
+              "RelativeDocumentMoniker": "Assets\\VRCarController.cs",
+              "ToolTip": "C:\\Users\\admin\\VR-Game\\Assets\\VRCarController.cs",
+              "RelativeToolTip": "Assets\\VRCarController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-18T06:59:22.636Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
