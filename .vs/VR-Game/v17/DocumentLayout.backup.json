@@ -7,7 +7,7 @@
       "RelativeMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|solutionrelative:assets\\autocentersteering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|c:\\users\\admin\\vr-game\\assets\\gearstickancor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|C:\\Users\\admin\\VR-Game\\assets\\gearstickancor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F58A8C27-1E47-D9B7-FB0A-935DFE17A41E}|Assembly-CSharp.csproj|solutionrelative:assets\\gearstickancor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -47,8 +47,7 @@
               "RelativeToolTip": "Assets\\GearStickAncor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-18T07:29:31.741Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-18T07:29:31.741Z"
             },
             {
               "$type": "Bookmark",
